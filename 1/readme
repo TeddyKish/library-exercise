@@ -1,0 +1,27 @@
+Finally! Now that I've mastered linking, I may start creating static libraries..
+
+1. What is a static library? How does one create it? What files are located within it?
+
+2. How (and when) does one link a static library to an executable?
+
+3. What are the advantages of a static library?
+
+4. Create a static library named libbeneltavori.a, and a header file beneltavori.h.
+   This library should contain the following files, and within them the following functions:
+
+   sing_together.c:
+   - void sing() // Perform some sing operation
+   - unsigned int calc_earnings(int show_type) // Return the amount of money earned in a concert of type <show_type>
+
+   sing_alone.c
+   - int breakup() // Declare a static local variable within the function, initialize it with 0, and return it
+   - void start_solo_career() // Prints "I'm going solo" then does nothing and returns.
+
+   Include the relevant declarations within beneltavori.h (maybe supply it).
+   Build sing_together.c and sing_alone.c into the static library.
+
+5. Create a main.cpp file that includes the beneltavori header.
+   Create a roadmap of static and ben el's career using the interface within the header.
+   Make sure to call <start_solo_career> last.
+
+   Print the roadmap within the main.cpp file.

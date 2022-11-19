@@ -1,0 +1,35 @@
+Well, after creating static libraries, shared libraries shouldn't be too hard..
+
+1. What is a shared library? How does one create it?
+
+2. In what ways can one link a shared library to an executable? How will it be used in each way?
+
+3. What are the advantages of a shared library?
+
+4. Create a shared library named libdolphin.so, and a header file "libdolphin.h".
+   This library should contain the following files, and within them the following functions:
+
+   dolphin.c:
+   A global variable that denots the stamina of the dolphin.
+   - void swim() // Swim within the sea
+   - int can_leap(double height) // Returns whether the dolphin can leap to <height>
+   - int leap(double height) // Tries to leap to <height>, return success status
+   If an unsuccessful leap is performed, the stamina should decrease.
+   After every swim, the stamina should increase.
+
+   sea.c
+   - int gather_pack(void) // Returns the amount of dolphins that were gathered together
+   	 This should be a private function used by perform_feat.
+   - int perform_feat(int feat_type) // Performs different types of feats using the group, returns success status
+   Make sure that the feat is only possible if enough dolphins were gathered in <gather_pack>.
+
+   Include the relevant declarations within "dolphin.h".
+   Build everything needed into libdolphin.so.
+
+5. Create main_loadtime.cpp file that links with libdolphin.so at load time and uses it.
+	Make sure to use the full interface from "dolphin.h".
+   Include the build command within your solution.
+
+6. Create main_runtime.cpp file that links with libdolphin.so at run time and uses it.
+	Make sure to use the full interface from "dolphin.h".
+   Include the build command within your solution.

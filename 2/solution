@@ -1,0 +1,36 @@
+1. What is a shared library? How does one create it?
+   A shared library is a type of code library that can be used by an executable.
+   It can be created using a compiler collection like gcc.
+   It contains implementations of functions usually defined in an external header.
+   It differs from a static library in several ways; 
+   One of them is that a dynamic library isn't an archive, but an ELF shared object file.
+   From this follows the fact that a dynamic library isn't included in the final executable.
+   Rather, the executable may contain load-time or run-time references to it.
+   It is the responsibility of the OS to solve those, whether at load-time or at run-time.
+
+2. In what ways can one link a shared library to an executable? How will it be used in each way?
+   It can be linked to an executable in load-time or in runtime.
+   In load time, the shared library dependency is located within the executable.
+   It is then the loader's responsibility of bringing a copy of every library to memory.
+
+   In run time, the executable itself uses the 'dlopen', 'dlsym' and 'dlclose' primitives.
+   Each primitive, respectively, Opens a shared library, chooses a specific symbol from it, and closes it.
+   The decision of which library to load can then be made at runtime - this enables plugins, for example.
+
+3. What are the advantages of a shared library?
+   Fixes in shared libraries propagate to all of their users without recompiling the executables.
+   The size of executables that use a shared library stays small, because the shared libraries it uses aren't included within its image.
+   The program's functionality can be extended without recompiling it, using plugins- runtime loaded shared libraries.
+
+4. Create a shared library named libdolphin.so, and a header file "libdolphin.h".
+   This library should contain the following files, and within them the described functions.
+
+   dolphin.o, sea.o. Include the relevant declarations within "dolphin.h".
+   Build everything needed into libdolphin.so.
+
+5. Create main_loadtime.cpp file that links with libdolphin.so at load time and uses it.
+   Verify that all of the functions are used and the build commands are correct.
+
+6. Create main_runtime.cpp file that links with libdolphin.so at run time and uses it.
+   Verify that all of the functions are used and the build commands are correct.
+   This version should include calls to the 'dlXXXXX' family mentioned earlier.

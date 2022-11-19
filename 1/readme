@@ -17,7 +17,7 @@ Finally! Now that I've mastered linking, I may start creating static libraries..
    - int breakup() // Declare a static local variable within the function, initialize it with 0, and return it
    - void start_solo_career() // Prints "I'm going solo" then does nothing and returns.
 
-   Include the relevant declarations within beneltavori.h (maybe supply it).
+   Include the relevant declarations within beneltavori.h.
    Build sing_together.c and sing_alone.c into the static library.
 
 5. Create a main.cpp file that includes the beneltavori header.
@@ -25,3 +25,4 @@ Finally! Now that I've mastered linking, I may start creating static libraries..
    Make sure to call <start_solo_career> last.
 
    Print the roadmap within the main.cpp file.
+   Include your build command within the solution.

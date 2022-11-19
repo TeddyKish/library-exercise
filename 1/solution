@@ -1,0 +1,25 @@
+1. What is a static library? How does one create it? What files are located within it?
+   A static library is a collection of object files inside an archive with an index table.
+   It is usually suffixed with '.a'. 
+   One can create it using 'ar' with the correct flag combination, grouping multiple object files.
+
+2. How (and when) does one link a static library to an executable?
+   A static library is linked to an executable upon linking the object files of the program.
+   If the static library is used, then one or more object files use functions defined in the library.
+   In order for the linking to succeed and produce an executable, this library must be supplied in the linking stage.
+   The -L flag for the linker adds a directory where libraries could be searched for.
+   The -lLIB flag adds a library named <LIB>, which the linker will then search for.
+
+3. What are the advantages of a static library?
+   The final executable is not dependent on a specific platform because it contains all of its dependencies within it. Performance might be better because no calls are indirect (every function call is contained within the executable's text section).
+   The program can be tested and verified because its components do not change, as oppoosed to dynamic libraries.
+
+4. Create a static library named libbeneltavori.a, and a header file beneltavori.h.
+   The output of this stage should be two object files: sing_together.o, sing_alone.o
+   These object files should then be archived into the library using 'ar' with the correct flags.
+   Relevant declarations should be located within beneltavori.h.
+
+5. Create a main.cpp file that includes the "beneltavori.h" header.
+   The code should call the functions in the correct order.
+   The static library should be supplied in the build command.
+   The build command should use -L for the library directory and -l for the name of the library.

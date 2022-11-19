@@ -11,7 +11,7 @@ Compiling a dynamic library, then using it multiple ways.
 Interesting scenarios regarding directory search order of libraries.
 
 # Part 4
-Using a C library within CPP.
+Practical application of rpath in contrast to LD_LIBRARY_PATH.
 
 # Part 5
-pwnable style CTF with libraries!
+A theoretical exercise about PIC, GOT & PLT

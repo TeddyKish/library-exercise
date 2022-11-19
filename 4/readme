@@ -1,0 +1,17 @@
+Alas, it is time to show the world the true victor between rpath and LD_LIBRARY_PATH!
+
+1. Create two libraries with the same name- libplane.so.
+    Implement the void fly(void) function within both libraries, and provide different printings.
+
+2. Create an executable that uses "libplane.so" and links with it dynamically (not in runtime).
+
+3. Show how different values of LD_LIBRARY_PATH control the functionality of the executable.
+
+4. Build two different executables, each with an rpath that points to a different directory.
+	Place the different instances of libplane.so in the different directories.
+
+	Now, pick one of the executables and its corresponding directory that contains its instance of libplane.so.
+	Verify that even if you set LD_LIBRARY_PATH to the other directory containing the other instance of libplane.so, the functionality isn't changed.
+
+
+Include the build commands in your solution!

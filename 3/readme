@@ -1,0 +1,13 @@
+After creating static and shared libraries, its time we talked about their complications..
+
+1. What is an soname? What are its usages?
+
+2. Why are only sonames encoded within an executable, rather than an absolute path?
+
+3. What is /etc/ld.so.conf? Explain the mechanism and the cache file /etc/ld.so.cache
+
+4. What is the order in which libraries are loaded? What are the reasons for it?
+
+5. What is LD_LIBRARY_PATH? What can it be used for? Is it a good long-term solution?
+
+6. Explain the 'rpath' method. Compare it to LD_LIBRARY_PATH.

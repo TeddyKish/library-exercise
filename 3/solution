@@ -1,0 +1,46 @@
+1. What is an soname? What are its usages?
+	SONAME is a the name of the form lib[NAME].so.[major], for example libted.so.7
+	Shared libraries are referred to by their SONAMEs in the linking process.
+	That is because the SONAME provides compatibility notation within it.
+	Real shared object filenames contains minor versions and subversions.
+
+2. Why are only sonames encoded within an executable, rather than an absolute path?
+	Absolute paths may change from one platform to another.
+	Moreover, different versions of the shared object are acceptable, as long as they are compatible.
+	An absolute path would also determine an exact version of the library.
+	This is not ideal, because that would limit the executable to a single version of the .so .
+
+3. What is /etc/ld.so.conf? Explain the mechanism and the cache file /etc/ld.so.cache
+	The /etc/ld.so.conf file contains the directories in which the linker should search for libraries when linking an executable (this holds for static/dynamic libraries the same).
+	The linker uses this configuration file to search the different libraries.
+	Directory traversal is slow, which is why the linker uses the cache file /etc/ld.so.cache.
+	This cache file resolves SONAMEs of libraries to actual paths on the platform.
+	If you add a new library to your platform, you must run 'ldconfig' to update this cache file.
+
+	If the loader can't find a required library, it makes a last effort by searching in the system.
+	The /lib and /usr/lib are consulted, and if the library isn't there, the loader returns an error.
+
+4. What is the order in which libraries are loaded? What are the reasons for it?
+	The library loading order, is determined by a breadth-first traversal of library dependencies.
+	Starting with the libraries directly linked to the executable, by their order on the linkline.
+
+	Practically, this means- first, all of the libraries that were supplied on the linkline.
+	Then, every library's dependencies, following their order from the linkline.
+
+5. What is LD_LIBRARY_PATH? What can it be used for? Is it a good long-term solution?
+	LD_LIBRARY_PATH is an environment variable that the dynamic loader uses.
+	It holds additional library search directories for the loader to use.
+	It can be used as a hack to solve quick problems, like an executable needing a library which is located in its execution folder.
+	The hack will then be to run the executable when setting LD_LIBRARY_PATH=. .
+
+	It is generally unadvised, because it introduces a lot of overhead to the dynamic loader.
+	It means the loader has to search in the directories specified in this environment variable, everytime when performing an operation, without a cache file at hand.
+	Second, it may cause the wrong libraries to be loaded, if a user keeps different sets of libraries and wishes to load each set at different times.
+	(using LD_LIBRARY_PATH, only one of the sets will always be loaded).
+
+6. Explain the 'rpath' method. Compare it to LD_LIBRARY_PATH.
+	rpath is a mechanism to embed additional library search paths within the executable itself.
+	That way, the executable searches for the libraries in a specific directory.
+	This directory can be defined by the library writer, so it won't clash with other libraries.
+
+	This is probably better than LD_LIBRARY_PATH because the search order is local to the executable, and not global to the operating system.

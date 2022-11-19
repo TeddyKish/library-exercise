@@ -1,0 +1,9 @@
+Shared libraries are so strange. 
+All of these different flags in compilation... What are they?
+Lazy binding, GOT, PLT... man, I've got to finally understand what they mean!
+
+1. What is position independent code? What is a position independent executable?
+
+2. What do the flags -fPIC and -fpic do? What is the difference between them?
+
+3. What are the GOT & PLT? How are they involved in the "lazy binding" process?

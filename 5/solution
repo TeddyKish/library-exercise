@@ -1,0 +1,27 @@
+1. What is position independent code? What is a position independent executable?
+	PIC is code that can execute properly regardless of its loading location, e.g. absolute address.
+	PIC is essential for shared libraries, because the nature of libraries is to be loaded/unloaded on demand.
+	This means that the address space of a single process can't guarantee free spaces in advance.
+	Following this, a shared library will be mapped into different virtual adresses in each process.
+	Enabling the library to be executed regardless of its base address is of much importance.
+	Obviously, this is more relevant to libraries and not executables.
+	An executable can be based on a specific address because it gets a fresh address space every time it is run.
+
+	PIEs are executables that can run without a fixed base address.
+	This mainly enables security mechanisms such as ASLR to occur effectively.
+
+2. What do the flags -fPIC and -fpic do? What is the difference between them?
+	
+	fpic generates the shared library as PIC. This means all constant addresses are accessed through a GOT. The loader resolves the GOT entries when the program starts.
+
+	Difference between fpic and fPIC is that fPIC doesn't limit the size of the GOT.
+
+3. What are the GOT & PLT? How are they involved in the "lazy binding" process?
+	The GOT is the global offset table, that records mappings of constant addresses to absolute locations, to enable a body of code to be PIC.
+	The PLT is the procedure linking table, converts PIC function calls to absolute locations.
+	The PLT contains the mappings to functions whose address isn't known at link time, and is left to be resolved by the loader at runtime.
+
+	The lazy binding works as written in the essay provided- the linker sets all unresolved function calls to point to a specific PLT entry.
+	The loader then resets all of those entries to a symbol-binding function.
+	The idea is that the first call to a function will enter the symbol-binding function, which will in turn overwrite the PLT entry for that function to its actual address.
+	That way, in future invocations, the function itself will be called, without the indirection of the symbol-binding function!
